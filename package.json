@@ -1,0 +1,14 @@
+{
+  "name": "srt-to-text",
+  "version": "1.0.0",
+  "description": "Parse SRT files",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "author": "Gary Sieling",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^5.2.0"
+  }
+}
