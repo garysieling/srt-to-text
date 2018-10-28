@@ -1,6 +1,6 @@
 {
   "name": "srt-to-text",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse SRT files",
   "main": "index.js",
   "scripts": {
