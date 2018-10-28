@@ -22,12 +22,15 @@ exports.parse = function(text) {
     if (line.match(matchBreak)) {
       started = true;
     } else if (started) {
-      transcript += 
-        ' ' + line.replace(/[<]c[.]([^>]+)[>]/g, '')
+      const noTags = line.replace(/[<]c[.]([^>]+)[>]/g, '')
 	          .replace(/[<]c[>]/g, '')
 	          .replace(/[<][\/]c[>]/g, '')
 	          .replace(/[<][>]/g, '')
-	          .replace(/[<]\d\d:\d\d:\d\d\.\d\d\d[>]/g, '')
+	          .replace(/[<]\d\d:\d\d:\d\d\.\d\d\d[>]/g, '');
+
+      if (!transcript.endsWith(noTags)) {
+	transcript += ' ' + noTags;
+      }
     }
   }
  
