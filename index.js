@@ -12,13 +12,22 @@ exports.parse = function(text) {
   }
 
   let lines = text.split("\n");
-  let matchBreak = /\d\d:\d\d:\d\d\.\d\d\d --> \d\d:\d\d:\d\d\.\d\d\d/i;
+  // can have css on the end
+  let matchBreak = /^\d\d:\d\d:\d\d\.\d\d\d --> \d\d:\d\d:\d\d\.\d\d\d.*/i;
   let transcript = "";
+  let started = false; // style block is optional - helps skip it
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i];
  
-    if (!line.match(matchBreak)) {
-      transcript += ' ' + line;
+    if (line.match(matchBreak)) {
+      started = true;
+    } else if (started) {
+      transcript += 
+        ' ' + line.replace(/[<]c[.]([^>]+)[>]/g, '')
+	          .replace(/[<]c[>]/g, '')
+	          .replace(/[<][\/]c[>]/g, '')
+	          .replace(/[<][>]/g, '')
+	          .replace(/[<]\d\d:\d\d:\d\d\.\d\d\d[>]/g, '')
     }
   }
  
